@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class DetailScreen extends StatelessWidget {
   final Map<String, dynamic> newsDetail;
@@ -15,31 +16,55 @@ class DetailScreen extends StatelessWidget {
             expandedHeight: 300.0,
             floating: false,
             pinned: true,
-            backgroundColor: const Color(0xFF164e63),
-            leading: Container(
-              margin: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back, color: Color(0xFF6366f1)),
-                onPressed: () => Navigator.pop(context),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.6),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white.withOpacity(0.8)),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Color(0xFF0F172A),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
+                ),
               ),
             ),
             actions: [
-              Container(
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                ),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.bookmark_border,
-                    color: Color(0xFF6366f1),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.6),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.8),
+                        ),
+                      ),
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.bookmark_border,
+                          color: Color(0xFF0F172A),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
                   ),
-                  onPressed: () {},
                 ),
               ),
             ],
@@ -63,15 +88,14 @@ class DetailScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  // Gradient overlay for better text readability
                   Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.transparent,
-                          Colors.black.withOpacity(0.7),
+                          Colors.black.withOpacity(0.0),
+                          Colors.black.withOpacity(0.55),
                         ],
                       ),
                     ),
@@ -84,12 +108,13 @@ class DetailScreen extends StatelessWidget {
           // Content Section
           SliverToBoxAdapter(
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(24),
                   topRight: Radius.circular(24),
                 ),
+                border: Border.all(color: Colors.grey[200]!),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -105,13 +130,16 @@ class DetailScreen extends StatelessWidget {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF84cc16).withOpacity(0.1),
                             borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: const Color(0xFF6366F1).withOpacity(0.25),
+                            ),
+                            color: const Color(0xFF6366F1).withOpacity(0.06),
                           ),
                           child: const Text(
                             'Breaking News',
                             style: TextStyle(
-                              color: Color(0xFF84cc16),
+                              color: Color(0xFF6366F1),
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),
@@ -124,37 +152,38 @@ class DetailScreen extends StatelessWidget {
                             color: Colors.grey[600],
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
+                            letterSpacing: 0.1,
                           ),
                         ),
                       ],
                     ),
 
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
 
                     // Article Title
                     Text(
                       newsDetail['title'],
                       style: const TextStyle(
-                        fontSize: 28,
+                        fontSize: 26,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFF1f2937),
-                        height: 1.3,
-                        letterSpacing: -0.5,
+                        color: Color(0xFF0F172A),
+                        height: 1.28,
+                        letterSpacing: -0.3,
                       ),
                     ),
 
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
 
                     // Author and date info
                     Row(
                       children: [
                         CircleAvatar(
                           radius: 20,
-                          backgroundColor: const Color(0xFF6366f1),
-                          child: Text(
-                            'JD',
-                            style: const TextStyle(
-                              color: Colors.white,
+                          backgroundColor: const Color(0xFFE2E8F0),
+                          child: const Text(
+                            'RG',
+                            style: TextStyle(
+                              color: Color(0xFF0F172A),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -164,10 +193,10 @@ class DetailScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              'John Doe',
+                              'Raja Gustav',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF6366f1),
+                                color: Color(0xFF0F172A),
                               ),
                             ),
                             Text(
@@ -175,6 +204,7 @@ class DetailScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey[600],
+                                letterSpacing: 0.1,
                               ),
                             ),
                           ],
@@ -182,25 +212,25 @@ class DetailScreen extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
 
                     // Divider
-                    Container(height: 1, color: Colors.grey[200]),
+                    Divider(color: Colors.grey[200], height: 1),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
 
                     // Article Content
                     Text(
                       newsDetail['contentSnippet'],
                       style: const TextStyle(
                         fontSize: 16,
-                        height: 1.6,
+                        height: 1.7,
                         color: Color(0xFF475569),
                         letterSpacing: 0.1,
                       ),
                     ),
 
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 28),
 
                     // Action buttons
                     Row(
@@ -211,9 +241,9 @@ class DetailScreen extends StatelessWidget {
                             icon: const Icon(Icons.share, size: 18),
                             label: const Text('Share Article'),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF6366f1),
+                              backgroundColor: const Color(0xFF6366F1),
                               foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              padding: const EdgeInsets.symmetric(vertical: 14),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -224,16 +254,17 @@ class DetailScreen extends StatelessWidget {
                         const SizedBox(width: 12),
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey[300]!),
+                            color: Colors.white,
+                            border: Border.all(color: Colors.grey[200]!),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: IconButton(
                             onPressed: () {},
                             icon: const Icon(
                               Icons.favorite_border,
-                              color: Color(0xFF6366f1),
+                              color: Color(0xFF6366F1),
                             ),
-                            padding: const EdgeInsets.all(16),
+                            padding: const EdgeInsets.all(14),
                           ),
                         ),
                       ],
